@@ -3,579 +3,446 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VALU - Скачать программы</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>VALU - Minecraft Лаунчер</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', Arial, sans-serif;
+            background: #111;
+            color: #fff;
             min-height: 100vh;
-            color: #333;
         }
-
-        /* Header */
         .header {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            background: #000;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.7);
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            width: 100%;
             z-index: 1000;
         }
-
         .nav {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 2rem;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
         }
-
         .logo {
-            font-size: 2rem;
-            font-weight: 800;
-            color: white;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #e10600;
+            letter-spacing: 2px;
             text-decoration: none;
+            text-transform: uppercase;
         }
-
         .nav-links {
             display: flex;
             gap: 2rem;
-            align-items: center;
         }
-
         .nav-link {
-            color: white;
+            color: #fff;
             text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 0.5rem 1.2rem;
             border-radius: 8px;
-            transition: all 0.3s ease;
+            transition: background 0.3s, color 0.3s;
         }
-
-        .nav-link:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
+        .nav-link.active, .nav-link:hover {
+            background: #e10600;
+            color: #fff;
         }
-
         .auth-buttons {
             display: flex;
             gap: 1rem;
-            align-items: center;
         }
-
-        .btn-login {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 0.5rem 1.5rem;
-            font-size: 0.9rem;
-        }
-
-        .btn-login:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .btn-register {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+        .auth-btn {
+            background: #e10600;
+            color: #fff;
             border: none;
-            padding: 0.5rem 1.5rem;
-            font-size: 0.9rem;
+            border-radius: 8px;
+            padding: 0.5rem 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s;
         }
-
-        .btn-register:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        .auth-btn:hover {
+            background: #b80000;
         }
-
-        /* Hero Section */
-        .hero {
-            padding: 8rem 2rem 4rem;
-            text-align: center;
-            color: white;
+        .user-info {
+            display: none;
+            align-items: center;
+            gap: 1rem;
         }
-
+        .username {
+            font-weight: 700;
+            color: #e10600;
+        }
+        .profile-btn, .logout-btn {
+            background: #181818;
+            color: #fff;
+            border: 2px solid #e10600;
+            border-radius: 8px;
+            padding: 0.5rem 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+        .profile-btn:hover, .logout-btn:hover {
+            background: #e10600;
+            color: #fff;
+        }
+        .main-hero {
+            background: linear-gradient(120deg, #1a1a1a 60%, #e10600 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 8rem;
+            padding-bottom: 4rem;
+        }
         .hero-content {
-            max-width: 800px;
+            max-width: 700px;
             margin: 0 auto;
+            text-align: center;
         }
-
-        .hero h1 {
+        .hero-content h1 {
             font-size: 4rem;
-            font-weight: 800;
+            font-weight: 900;
+            color: #fff;
             margin-bottom: 1.5rem;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+            text-shadow: 0 4px 16px rgba(225,6,0,0.15);
         }
-
-        .hero p {
+        .hero-content p {
             font-size: 1.5rem;
-            margin-bottom: 3rem;
-            opacity: 0.9;
+            color: #e0e0e0;
+            margin-bottom: 2.5rem;
             line-height: 1.6;
         }
-
         .cta-buttons {
             display: flex;
             gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
         }
-
         .btn {
             display: inline-block;
-            padding: 1rem 2rem;
+            padding: 1.1rem 2.5rem;
             font-size: 1.2rem;
-            font-weight: 600;
-            text-decoration: none;
+            font-weight: 900;
             border-radius: 12px;
-            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
             cursor: pointer;
+            transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
         }
-
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            background: #e10600;
+            color: #fff;
+            box-shadow: 0 8px 25px rgba(225,6,0,0.18);
         }
-
         .btn-primary:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+            background: #b80000;
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 12px 30px rgba(225,6,0,0.25);
         }
-
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: #181818;
+            color: #fff;
+            border: 2px solid #e10600;
         }
-
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-4px);
+            background: #e10600;
+            color: #fff;
+            transform: translateY(-4px) scale(1.04);
         }
-
-
-
-        /* Footer */
-        .footer {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 3rem 2rem;
-            text-align: center;
-            color: white;
-            position: fixed;
-            bottom: 0; /* Показывается по умолчанию */
-            left: 0;
-            right: 0;
-            z-index: 999;
-            transform: translateY(100%); /* Скрыт по умолчанию */
-            transition: transform 0.3s ease;
-        }
-        
-        .footer.show {
-            transform: translateY(0); /* Показывается при скролле вниз */
-        }
-
-        .footer-content {
+        .features-section {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 4rem 2rem 2rem;
         }
-
+        .features-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #e10600;
+            margin-bottom: 2.5rem;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .feature-card {
+            background: #181818;
+            border-radius: 18px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-8px) scale(1.03);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #e10600;
+            margin-bottom: 1rem;
+        }
+        .feature-card h3 {
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.7rem;
+        }
+        .feature-card p {
+            color: #e0e0e0;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .community-section {
+            background: #181818;
+            margin: 4rem 0 0 0;
+            padding: 3rem 2rem;
+            border-radius: 18px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        .community-section h2 {
+            color: #e10600;
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 1.2rem;
+        }
+        .community-section p {
+            color: #e0e0e0;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+        .community-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        .community-link {
+            color: #fff;
+            font-size: 2rem;
+            background: #e10600;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s, transform 0.2s;
+            text-decoration: none;
+        }
+        .community-link:hover {
+            background: #b80000;
+            transform: scale(1.1);
+        }
+        .footer {
+            background: #000;
+            color: #fff;
+            padding: 3rem 2rem 1.5rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
         .footer-links {
             display: flex;
             justify-content: center;
             gap: 2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
-
         .footer-link {
-            color: white;
+            color: #fff;
             text-decoration: none;
             opacity: 0.8;
-            transition: opacity 0.3s ease;
+            font-weight: 700;
+            transition: color 0.3s, opacity 0.3s;
         }
-
         .footer-link:hover {
+            color: #e10600;
             opacity: 1;
         }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .auth-buttons {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .modal-content {
-                margin: 10% auto;
-                padding: 1.5rem;
-                width: 95%;
-            }
-
-            .profile-header {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .profile-modal {
-                max-width: 95%;
-            }
-        }
-
-
-
-        /* Modal Styles */
+        /* Modal styles */
         .modal {
             display: none;
             position: fixed;
             z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background: white;
-            margin: 5% auto;
-            padding: 2rem;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 450px;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
-            position: relative;
-            animation: modalSlideIn 0.3s ease;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .close {
-            position: absolute;
-            right: 1.5rem;
-            top: 1.5rem;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #999;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .close:hover {
-            color: #333;
-        }
-
-        .modal h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
-            font-weight: 700;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #333;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #e1e5e9;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            font-family: inherit;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .form-input.error {
-            border-color: #e74c3c;
-        }
-
-        .error-message {
-            color: #e74c3c;
-            font-size: 0.85rem;
-            margin-top: 0.5rem;
-        }
-
-        .modal-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 1rem;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
-        }
-
-        .modal-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-        }
-
-        .modal-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .modal-footer {
-            text-align: center;
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #e1e5e9;
-        }
-
-        .modal-footer a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .modal-footer a:hover {
-            color: #764ba2;
-        }
-
-        .success-message {
-            background: #d4edda;
-            color: #155724;
-            padding: 1rem;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .user-info {
-            display: none;
-            align-items: center;
-            gap: 1rem;
-            color: white;
-        }
-
-        .username {
-            font-weight: 500;
-        }
-
-        .logout-btn {
-            background: rgba(231, 76, 60, 0.8);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        .logout-btn:hover {
-            background: rgba(231, 76, 60, 1);
-            transform: translateY(-2px);
-        }
-
-        .profile-btn {
-            background: rgba(46, 204, 113, 0.8);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        .profile-btn:hover {
-            background: rgba(46, 204, 113, 1);
-            transform: translateY(-2px);
-        }
-
-        /* Profile Modal Styles */
-        .profile-modal {
-            max-width: 600px;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .profile-header {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 15px;
-            color: white;
-        }
-
-        .profile-avatar {
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
+            left: 0; top: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.7);
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
         }
-
-        .profile-info h3 {
-            margin: 0 0 0.5rem 0;
-            font-size: 1.5rem;
+        .modal-content {
+            background: #181818;
+            border-radius: 18px;
+            padding: 2.5rem 2rem;
+            max-width: 400px;
+            width: 90vw;
+            margin: auto;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            color: #fff;
         }
-
-        .profile-info p {
-            margin: 0 0 0.5rem 0;
-            opacity: 0.9;
+        .modal-content h2 {
+            color: #e10600;
+            margin-bottom: 1.5rem;
+            text-align: center;
         }
-
-        .profile-status {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
+        .close {
+            position: absolute;
+            right: 1.2rem;
+            top: 1.2rem;
+            font-size: 1.7rem;
+            color: #fff;
+            cursor: pointer;
+            transition: color 0.2s;
         }
-
-        .profile-settings {
-            margin: 2rem 0;
-            padding: 1.5rem;
-            background: #f8f9fa;
-            border-radius: 15px;
+        .close:hover { color: #e10600; }
+        .form-group {
+            margin-bottom: 1.2rem;
         }
-
-        .profile-settings h4 {
-            margin: 0 0 1rem 0;
-            color: #333;
-            font-size: 1.2rem;
+        .form-label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 700;
         }
-
-        .setting-item {
+        .form-input {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: none;
+            background: #222;
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+            transition: box-shadow 0.2s;
+        }
+        .form-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #e10600;
+        }
+        .modal-btn {
+            width: 100%;
+            background: #e10600;
+            color: #fff;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 900;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .modal-btn:hover {
+            background: #b80000;
+            transform: translateY(-2px) scale(1.03);
+        }
+        .modal-footer {
+            text-align: center;
+            margin-top: 1.2rem;
+        }
+        .modal-footer a {
+            color: #e10600;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .error-message {
+            color: #ff4d4f;
+            font-size: 0.95rem;
+            min-height: 1.1em;
+        }
+        .success-message {
+            color: #4caf50;
+            text-align: center;
             margin-bottom: 1rem;
+            font-weight: 700;
         }
-
-        .setting-label {
+        /* Profile modal styles */
+        .profile-modal .profile-header {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
-            font-weight: 500;
-            color: #555;
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
         }
-
-        .setting-label input[type="checkbox"] {
-            width: auto;
-            margin: 0;
+        .profile-avatar {
+            width: 56px; height: 56px;
+            background: #222;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem;
+            color: #e10600;
         }
-
+        .profile-info h3 { margin: 0; font-size: 1.2rem; }
+        .profile-info p { margin: 0; color: #e0e0e0; font-size: 0.95rem; }
+        .profile-status {
+            display: inline-block;
+            background: #e10600;
+            color: #fff;
+            border-radius: 8px;
+            padding: 0.2rem 0.7rem;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+        .profile-settings {
+            margin: 1.5rem 0 1rem 0;
+        }
+        .profile-settings h4 { margin-bottom: 0.7rem; }
+        .setting-item {
+            margin-bottom: 0.7rem;
+        }
+        .setting-label {
+            font-size: 1rem;
+            color: #e0e0e0;
+        }
         .profile-stats {
             margin-top: 2rem;
-            padding: 1.5rem;
-            background: #f8f9fa;
-            border-radius: 15px;
         }
-
-        .profile-stats h4 {
-            margin: 0 0 1rem 0;
-            color: #333;
-            font-size: 1.2rem;
-            text-align: center;
-        }
-
+        .profile-stats h4 { margin-bottom: 1rem; }
         .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
         }
-
         .stat-item {
             text-align: center;
-            padding: 1rem;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-
         .stat-number {
-            display: block;
-            font-size: 2rem;
-            font-weight: 700;
-            color: #667eea;
-            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: #e10600;
         }
-
         .stat-label {
-            font-size: 0.9rem;
-            color: #666;
-            font-weight: 500;
+            display: block;
+            color: #e0e0e0;
+            font-size: 0.95rem;
         }
-
-        textarea.form-input {
-            resize: vertical;
-            min-height: 80px;
+        .form-input.error {
+            border: 1.5px solid #ff4d4f;
         }
-
-        select.form-input {
-            cursor: pointer;
+        @media (max-width: 900px) {
+            .main-hero { padding-top: 7rem; }
+            .features-section { padding: 3rem 1rem 1rem; }
+            .community-section { padding: 2rem 1rem; }
+        }
+        @media (max-width: 600px) {
+            .logo { font-size: 1.5rem; }
+            .hero-content h1 { font-size: 2rem; }
+            .features-title { font-size: 1.5rem; }
+            .features-section { padding: 2rem 0.5rem 1rem; }
+            .feature-card { padding: 1.2rem 0.7rem; }
+            .community-section { padding: 1rem 0.5rem; }
+            .modal-content { padding: 1.2rem 0.7rem; }
         }
     </style>
 </head>
@@ -583,52 +450,83 @@
     <!-- Header -->
     <header class="header">
         <nav class="nav">
-            <a href="#" class="logo">VALU</a>
-                                <div class="nav-links">
-                <a href="#home" class="nav-link">Главная</a>
+            <a href="index.html" class="logo">VALU</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Главная</a>
                 <a href="about.html" class="nav-link">О нас</a>
                 <a href="contact.html" class="nav-link">Контакты</a>
-                <div class="auth-buttons">
-                    <button class="btn btn-login" onclick="openLoginModal()">Войти</button>
-                    <button class="btn btn-register" onclick="openRegisterModal()">Регистрация</button>
-                </div>
-                <div class="user-info">
-                    <span class="username">Привет, пользователь!</span>
-                    <button class="profile-btn" onclick="openProfileModal()">Мой профиль</button>
-                    <button class="logout-btn" onclick="logout()">Выйти</button>
-                </div>
+            </div>
+            <div class="auth-buttons">
+                <button class="auth-btn" onclick="openLoginModal()">Войти</button>
+                <button class="auth-btn" onclick="openRegisterModal()">Регистрация</button>
+            </div>
+            <div class="user-info" style="display:none;">
+                <span class="username"></span>
+                <button class="profile-btn" onclick="openProfileModal()">Профиль</button>
+                <button class="logout-btn" onclick="logout()">Выйти</button>
             </div>
         </nav>
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section class="main-hero">
         <div class="hero-content">
-            <h1>VALU - Minecraft Лаунчер</h1>
-            <p>Лучший лаунчер для Minecraft с удобным профилем игрока, настройками и статистикой. Присоединяйтесь к сообществу!</p>
+            <h1>VALU — Minecraft Лаунчер нового поколения</h1>
+            <p>Максимум удобства, безопасности и скорости для каждого игрока. Присоединяйтесь к нашему сообществу и наслаждайтесь игрой без границ!</p>
             <div class="cta-buttons">
-                <button class="btn btn-primary" onclick="openRegisterModal()">Начать</button>
-                <button class="btn btn-secondary" onclick="openLoginModal()">Войти</button>
+                <a href="https://github.com/valu-client" class="btn btn-primary" target="_blank" rel="noopener"><i class="fab fa-github"></i> Скачать</a>
+                <a href="about.html" class="btn btn-secondary">Подробнее</a>
             </div>
         </div>
     </section>
-    
-    <!-- Spacer for footer -->
-    <div style="height: 200px;"></div>
 
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="features-title">Почему выбирают VALU?</div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Безопасность</h3>
+                <p>Ваши данные и аккаунт под надежной защитой. Мы используем современные методы шифрования и защиты.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-rocket"></i></div>
+                <h3>Скорость</h3>
+                <p>Оптимизированный код и быстрый запуск — играйте без задержек и лагов.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-users"></i></div>
+                <h3>Сообщество</h3>
+                <p>Общайтесь, делитесь опытом и находите друзей среди тысяч игроков Minecraft.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-cogs"></i></div>
+                <h3>Гибкие настройки</h3>
+                <p>Настраивайте лаунчер под себя: темы, профили, моды и многое другое.</p>
+            </div>
+        </div>
+    </section>
 
+    <!-- Community Section -->
+    <section class="community-section">
+        <h2>Присоединяйтесь к VALU Community</h2>
+        <p>Следите за новостями, получайте поддержку и участвуйте в жизни проекта:</p>
+        <div class="community-links">
+            <a href="https://discord.gg/HG4eeF6J" class="community-link" target="_blank" rel="noopener" title="Discord"><i class="fab fa-discord"></i></a>
+            <a href="https://t.me/valu_support" class="community-link" target="_blank" rel="noopener" title="Telegram"><i class="fab fa-telegram"></i></a>
+            <a href="mailto:valu.client@gmail.com" class="community-link" title="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="about.html" class="footer-link">О нас</a>
-                <a href="#" class="footer-link">Политика конфиденциальности</a>
-                <a href="#" class="footer-link">Условия использования</a>
-                <a href="contact.html" class="footer-link">Поддержка</a>
-            </div>
-            <p>&copy; 2025 VALU. Все права защищены.</p>
+        <div class="footer-links">
+            <a href="about.html" class="footer-link">О нас</a>
+            <a href="#" class="footer-link">Политика конфиденциальности</a>
+            <a href="#" class="footer-link">Условия использования</a>
+            <a href="contact.html" class="footer-link">Поддержка</a>
         </div>
+        <p>&copy; 2025 VALU. Все права защищены.</p>
     </footer>
 
     <!-- Login Modal -->
@@ -636,27 +534,22 @@
         <div class="modal-content">
             <span class="close" onclick="closeLoginModal()">&times;</span>
             <h2>Вход в аккаунт</h2>
-            
             <div id="loginSuccess" class="success-message" style="display: none;">
                 Успешный вход! Добро пожаловать!
             </div>
-            
-            <form id="loginForm">
+            <form id="loginForm" autocomplete="off">
                 <div class="form-group">
                     <label class="form-label" for="loginEmail">Email</label>
                     <input type="email" id="loginEmail" class="form-input" placeholder="Введите ваш email" required>
                     <div class="error-message" id="loginEmailError"></div>
                 </div>
-                
                 <div class="form-group">
                     <label class="form-label" for="loginPassword">Пароль</label>
                     <input type="password" id="loginPassword" class="form-input" placeholder="Введите ваш пароль" required>
                     <div class="error-message" id="loginPasswordError"></div>
                 </div>
-                
                 <button type="submit" class="modal-btn" id="loginBtn">Войти</button>
             </form>
-            
             <div class="modal-footer">
                 <p>Нет аккаунта? <a href="#" onclick="switchToRegister()">Зарегистрироваться</a></p>
             </div>
@@ -668,39 +561,32 @@
         <div class="modal-content">
             <span class="close" onclick="closeRegisterModal()">&times;</span>
             <h2>Регистрация</h2>
-            
             <div id="registerSuccess" class="success-message" style="display: none;">
                 Регистрация успешна! Теперь вы можете войти в аккаунт.
             </div>
-            
-            <form id="registerForm">
+            <form id="registerForm" autocomplete="off">
                 <div class="form-group">
                     <label class="form-label" for="registerUsername">Имя пользователя</label>
                     <input type="text" id="registerUsername" class="form-input" placeholder="Введите имя пользователя" required>
                     <div class="error-message" id="registerUsernameError"></div>
                 </div>
-                
                 <div class="form-group">
                     <label class="form-label" for="registerEmail">Email</label>
                     <input type="email" id="registerEmail" class="form-input" placeholder="Введите ваш email" required>
                     <div class="error-message" id="registerEmailError"></div>
                 </div>
-                
                 <div class="form-group">
                     <label class="form-label" for="registerPassword">Пароль</label>
                     <input type="password" id="registerPassword" class="form-input" placeholder="Введите пароль" required>
                     <div class="error-message" id="registerPasswordError"></div>
                 </div>
-                
                 <div class="form-group">
                     <label class="form-label" for="registerConfirmPassword">Подтвердите пароль</label>
                     <input type="password" id="registerConfirmPassword" class="form-input" placeholder="Повторите пароль" required>
                     <div class="error-message" id="registerConfirmPasswordError"></div>
                 </div>
-                
                 <button type="submit" class="modal-btn" id="registerBtn">Зарегистрироваться</button>
             </form>
-            
             <div class="modal-footer">
                 <p>Уже есть аккаунт? <a href="#" onclick="switchToLogin()">Войти</a></p>
             </div>
@@ -712,11 +598,9 @@
         <div class="modal-content profile-modal">
             <span class="close" onclick="closeProfileModal()">&times;</span>
             <h2>Мой профиль</h2>
-            
             <div id="profileSuccess" class="success-message" style="display: none;">
                 Профиль успешно обновлен!
             </div>
-            
             <div class="profile-header">
                 <div class="profile-avatar">
                     <i class="fas fa-user"></i>
@@ -727,23 +611,19 @@
                     <span class="profile-status">Minecraft игрок</span>
                 </div>
             </div>
-            
             <form id="profileForm">
                 <div class="form-group">
                     <label class="form-label" for="profileDisplayName">Отображаемое имя</label>
                     <input type="text" id="profileDisplayName" class="form-input" placeholder="Ваше отображаемое имя">
                 </div>
-                
                 <div class="form-group">
                     <label class="form-label" for="profileMinecraftUsername">Minecraft никнейм</label>
                     <input type="text" id="profileMinecraftUsername" class="form-input" placeholder="Ваш Minecraft никнейм">
                 </div>
-                
                 <div class="form-group">
                     <label class="form-label" for="profileAge">Возраст</label>
                     <input type="number" id="profileAge" class="form-input" placeholder="Ваш возраст" min="13" max="100">
                 </div>
-                
                 <div class="form-group">
                     <label class="form-label" for="profileCountry">Страна</label>
                     <select id="profileCountry" class="form-input">
@@ -755,22 +635,18 @@
                         <option value="other">Другая</option>
                     </select>
                 </div>
-                
                 <div class="form-group">
                     <label class="form-label" for="profileBio">О себе</label>
                     <textarea id="profileBio" class="form-input" rows="3" placeholder="Расскажите немного о себе..."></textarea>
                 </div>
-                
                 <div class="form-group">
                     <label class="form-label" for="profileDiscord">Discord</label>
                     <input type="text" id="profileDiscord" class="form-input" placeholder="Ваш Discord (необязательно)">
                 </div>
-                
                 <div class="form-group">
                     <label class="form-label" for="profileFavoriteServer">Любимый сервер</label>
                     <input type="text" id="profileFavoriteServer" class="form-input" placeholder="IP вашего любимого сервера">
                 </div>
-                
                 <div class="profile-settings">
                     <h4>Настройки</h4>
                     <div class="setting-item">
@@ -792,10 +668,8 @@
                         </label>
                     </div>
                 </div>
-                
                 <button type="submit" class="modal-btn" id="profileBtn">Сохранить изменения</button>
             </form>
-            
             <div class="profile-stats">
                 <h4>Статистика</h4>
                 <div class="stats-grid">
@@ -817,314 +691,159 @@
     </div>
 
     <script>
-        // Smooth scrolling for navigation links (only for same-page anchors)
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-
-
-        // Initialize animations
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check if user is logged in
-            checkAuthStatus();
-        });
-
-        // Authentication functions
-        let currentUser = null;
-        let userProfile = null;
-
+        // --- UI & Modal Logic ---
         function openLoginModal() {
-            document.getElementById('loginModal').style.display = 'block';
+            document.getElementById('loginModal').style.display = 'flex';
             clearFormErrors('login');
+            document.getElementById('loginSuccess').style.display = 'none';
         }
-
         function closeLoginModal() {
             document.getElementById('loginModal').style.display = 'none';
             clearFormErrors('login');
         }
-
         function openRegisterModal() {
-            document.getElementById('registerModal').style.display = 'block';
+            document.getElementById('registerModal').style.display = 'flex';
             clearFormErrors('register');
+            document.getElementById('registerSuccess').style.display = 'none';
         }
-
         function closeRegisterModal() {
             document.getElementById('registerModal').style.display = 'none';
             clearFormErrors('register');
         }
-
         function switchToRegister() {
             closeLoginModal();
             openRegisterModal();
         }
-
         function switchToLogin() {
             closeRegisterModal();
             openLoginModal();
         }
+        function openProfileModal() {
+            document.getElementById('profileModal').style.display = 'flex';
+            loadProfileData();
+        }
+        function closeProfileModal() {
+            document.getElementById('profileModal').style.display = 'none';
+        }
+        window.onclick = function(event) {
+            ['loginModal','registerModal','profileModal'].forEach(id=>{
+                const modal = document.getElementById(id);
+                if(event.target===modal) modal.style.display='none';
+            });
+        };
+
+        // --- Auth Logic ---
+        let currentUser = null;
+        let userProfile = null;
 
         function clearFormErrors(formType) {
             const errorElements = document.querySelectorAll(`#${formType}Modal .error-message`);
             errorElements.forEach(el => el.textContent = '');
-            
             const inputs = document.querySelectorAll(`#${formType}Modal .form-input`);
             inputs.forEach(input => input.classList.remove('error'));
         }
-
         function showError(inputId, message) {
             const input = document.getElementById(inputId);
             const errorElement = document.getElementById(inputId + 'Error');
-            
             input.classList.add('error');
             errorElement.textContent = message;
         }
-
         function clearError(inputId) {
             const input = document.getElementById(inputId);
             const errorElement = document.getElementById(inputId + 'Error');
-            
             input.classList.remove('error');
             errorElement.textContent = '';
         }
 
-        // Login form handling
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('loginEmail').value.trim();
-            const password = document.getElementById('loginPassword').value;
-            
-            // Clear previous errors
-            clearFormErrors('login');
-            
-            // Validation
-            let hasErrors = false;
-            
-            if (!email) {
-                showError('loginEmail', 'Email обязателен');
-                hasErrors = true;
-            } else if (!/\S+@\S+\.\S+/.test(email)) {
-                showError('loginEmail', 'Введите корректный email');
-                hasErrors = true;
-            }
-            
-            if (!password) {
-                showError('loginPassword', 'Пароль обязателен');
-                hasErrors = true;
-            }
-            
-            if (hasErrors) return;
-            
-            // Check if user exists and password matches
-            const users = JSON.parse(localStorage.getItem('valuUsers') || '[]');
-            const user = users.find(u => u.email === email);
-            
-            if (!user) {
-                showError('loginEmail', 'Пользователь с таким email не найден');
-                return;
-            }
-            
-            if (user.password !== password) {
-                showError('loginPassword', 'Неверный пароль');
-                return;
-            }
-            
-            // Successful login
-            const loginBtn = document.getElementById('loginBtn');
-            loginBtn.disabled = true;
-            loginBtn.textContent = 'Вход...';
-            
-            setTimeout(() => {
-                currentUser = {
-                    username: user.username,
-                    email: user.email
-                };
-                
-                // Save to localStorage
-                localStorage.setItem('valuUser', JSON.stringify(currentUser));
-                
-                // Show success message
-                document.getElementById('loginSuccess').style.display = 'block';
-                
-                // Close modal after delay
-                setTimeout(() => {
-                    closeLoginModal();
-                    updateAuthUI();
-                }, 1500);
-                
-                loginBtn.disabled = false;
-                loginBtn.textContent = 'Войти';
-            }, 1000);
-        });
-
-        // Register form handling
+        // Registration
         document.getElementById('registerForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
             const username = document.getElementById('registerUsername').value.trim();
-            const email = document.getElementById('registerEmail').value.trim();
+            const email = document.getElementById('registerEmail').value.trim().toLowerCase();
             const password = document.getElementById('registerPassword').value;
             const confirmPassword = document.getElementById('registerConfirmPassword').value;
-            
-            // Clear previous errors
             clearFormErrors('register');
-            
-            // Validation
             let hasErrors = false;
-            
-            if (!username) {
-                showError('registerUsername', 'Имя пользователя обязательно');
-                hasErrors = true;
-            } else if (username.length < 3) {
-                showError('registerUsername', 'Имя пользователя должно содержать минимум 3 символа');
-                hasErrors = true;
-            }
-            
-            if (!email) {
-                showError('registerEmail', 'Email обязателен');
-                hasErrors = true;
-            } else if (!/\S+@\S+\.\S+/.test(email)) {
-                showError('registerEmail', 'Введите корректный email');
-                hasErrors = true;
-            }
-            
-            if (!password) {
-                showError('registerPassword', 'Пароль обязателен');
-                hasErrors = true;
-            } else if (password.length < 6) {
-                showError('registerPassword', 'Пароль должен содержать минимум 6 символов');
-                hasErrors = true;
-            }
-            
-            if (password !== confirmPassword) {
-                showError('registerConfirmPassword', 'Пароли не совпадают');
-                hasErrors = true;
-            }
-            
-            // Check if user already exists
+            if (!username) { showError('registerUsername', 'Имя пользователя обязательно'); hasErrors = true; }
+            else if (username.length < 3) { showError('registerUsername', 'Минимум 3 символа'); hasErrors = true; }
+            if (!email) { showError('registerEmail', 'Email обязателен'); hasErrors = true; }
+            else if (!/\S+@\S+\.\S+/.test(email)) { showError('registerEmail', 'Введите корректный email'); hasErrors = true; }
+            if (!password) { showError('registerPassword', 'Пароль обязателен'); hasErrors = true; }
+            else if (password.length < 6) { showError('registerPassword', 'Минимум 6 символов'); hasErrors = true; }
+            if (password !== confirmPassword) { showError('registerConfirmPassword', 'Пароли не совпадают'); hasErrors = true; }
+            // Check if user exists
             const users = JSON.parse(localStorage.getItem('valuUsers') || '[]');
-            if (users.find(u => u.email === email)) {
-                showError('registerEmail', 'Пользователь с таким email уже существует');
-                hasErrors = true;
-            }
-            
+            if (users.find(u => u.email === email)) { showError('registerEmail', 'Email уже зарегистрирован'); hasErrors = true; }
             if (hasErrors) return;
-            
-            // Simulate registration (in real app, this would be an API call)
-            const registerBtn = document.getElementById('registerBtn');
-            registerBtn.disabled = true;
-            registerBtn.textContent = 'Регистрация...';
-            
+            // Save user
+            users.push({ username, email, password });
+            localStorage.setItem('valuUsers', JSON.stringify(users));
+            document.getElementById('registerSuccess').style.display = 'block';
             setTimeout(() => {
-                // Save user to users list
-                const users = JSON.parse(localStorage.getItem('valuUsers') || '[]');
-                const newUser = {
-                    username: username,
-                    email: email,
-                    password: password
-                };
-                users.push(newUser);
-                localStorage.setItem('valuUsers', JSON.stringify(users));
-                
-                // Show success message
-                document.getElementById('registerSuccess').style.display = 'block';
-                
-                // Close modal after delay and switch to login
-                setTimeout(() => {
-                    closeRegisterModal();
-                    openLoginModal();
-                    document.getElementById('loginEmail').value = email;
-                }, 1500);
-                
-                registerBtn.disabled = false;
-                registerBtn.textContent = 'Зарегистрироваться';
+                closeRegisterModal();
+                openLoginModal();
+                document.getElementById('loginEmail').value = email;
+            }, 1200);
+        });
+
+        // Login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+            const password = document.getElementById('loginPassword').value;
+            clearFormErrors('login');
+            let hasErrors = false;
+            if (!email) { showError('loginEmail', 'Email обязателен'); hasErrors = true; }
+            else if (!/\S+@\S+\.\S+/.test(email)) { showError('loginEmail', 'Введите корректный email'); hasErrors = true; }
+            if (!password) { showError('loginPassword', 'Пароль обязателен'); hasErrors = true; }
+            if (hasErrors) return;
+            const users = JSON.parse(localStorage.getItem('valuUsers') || '[]');
+            const user = users.find(u => u.email === email);
+            if (!user) { showError('loginEmail', 'Пользователь не найден'); return; }
+            if (user.password !== password) { showError('loginPassword', 'Неверный пароль'); return; }
+            // Success
+            currentUser = { username: user.username, email: user.email };
+            localStorage.setItem('valuUser', JSON.stringify(currentUser));
+            document.getElementById('loginSuccess').style.display = 'block';
+            setTimeout(() => {
+                closeLoginModal();
+                updateAuthUI();
             }, 1000);
         });
 
+        // Auth UI
         function updateAuthUI() {
             const authButtons = document.querySelector('.auth-buttons');
             const userInfo = document.querySelector('.user-info');
-            
             if (currentUser) {
                 authButtons.style.display = 'none';
                 userInfo.style.display = 'flex';
-                
-                // Show display name if available, otherwise username
-                const displayName = userProfile && userProfile.displayName ? userProfile.displayName : currentUser.username;
-                document.querySelector('.username').textContent = `Привет, ${displayName}!`;
+                document.querySelector('.username').textContent = `Привет, ${currentUser.username}!`;
             } else {
                 authButtons.style.display = 'flex';
                 userInfo.style.display = 'none';
             }
         }
-
         function logout() {
-            // Clear current user and profile
-            if (currentUser) {
-                localStorage.removeItem(`valuUserProfile_${currentUser.email}`);
-            }
             currentUser = null;
             userProfile = null;
             localStorage.removeItem('valuUser');
             updateAuthUI();
         }
-
         function checkAuthStatus() {
             const savedUser = localStorage.getItem('valuUser');
             if (savedUser) {
                 currentUser = JSON.parse(savedUser);
-                updateAuthUI();
-                
-                // Load user profile
-                const savedProfile = localStorage.getItem(`valuUserProfile_${currentUser.email}`);
-                if (savedProfile) {
-                    userProfile = JSON.parse(savedProfile);
-                }
             }
+            updateAuthUI();
         }
 
-        // Profile functions
-        function openProfileModal() {
-            document.getElementById('profileModal').style.display = 'block';
-            loadProfileData();
-        }
-
-        function closeProfileModal() {
-            document.getElementById('profileModal').style.display = 'none';
-        }
-
+        // Profile
         function loadProfileData() {
-            if (!userProfile) {
-                // Create default profile
-                userProfile = {
-                    displayName: currentUser.username,
-                    minecraftUsername: '',
-                    age: '',
-                    country: '',
-                    bio: '',
-                    discord: '',
-                    favoriteServer: '',
-                    newsletter: false,
-                    serverUpdates: false,
-                    publicProfile: true,
-                    downloads: 0,
-                    favoriteServers: 0,
-                    daysInGame: 0
-                };
-            }
-
-            // Fill form fields
-            document.getElementById('profileDisplayName').value = userProfile.displayName || '';
+            if (!currentUser) return;
+            const key = `valuUserProfile_${currentUser.email}`;
+            userProfile = JSON.parse(localStorage.getItem(key) || '{}');
+            document.getElementById('profileDisplayName').value = userProfile.displayName || currentUser.username;
             document.getElementById('profileMinecraftUsername').value = userProfile.minecraftUsername || '';
             document.getElementById('profileAge').value = userProfile.age || '';
             document.getElementById('profileCountry').value = userProfile.country || '';
@@ -1134,18 +853,16 @@
             document.getElementById('profileNewsletter').checked = userProfile.newsletter || false;
             document.getElementById('profileServerUpdates').checked = userProfile.serverUpdates || false;
             document.getElementById('profilePublicProfile').checked = userProfile.publicProfile !== false;
-
-            // Update profile header
             document.getElementById('profileUsername').textContent = userProfile.displayName || currentUser.username;
             document.getElementById('profileEmail').textContent = currentUser.email;
-
-            // Update stats
             document.querySelectorAll('.stat-number')[0].textContent = userProfile.downloads || 0;
             document.querySelectorAll('.stat-number')[1].textContent = userProfile.favoriteServers || 0;
             document.querySelectorAll('.stat-number')[2].textContent = userProfile.daysInGame || 0;
         }
-
-        function saveProfileData() {
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (!currentUser) return;
+            const key = `valuUserProfile_${currentUser.email}`;
             userProfile = {
                 displayName: document.getElementById('profileDisplayName').value.trim(),
                 minecraftUsername: document.getElementById('profileMinecraftUsername').value.trim(),
@@ -1161,81 +878,22 @@
                 favoriteServers: userProfile ? userProfile.favoriteServers : 0,
                 daysInGame: userProfile ? userProfile.daysInGame : 0
             };
-
-            // Save to localStorage with unique key for each user
-            localStorage.setItem(`valuUserProfile_${currentUser.email}`, JSON.stringify(userProfile));
-
-            // Update UI
-            updateAuthUI();
-        }
-
-        // Close modals when clicking outside
-        window.onclick = function(event) {
-            const loginModal = document.getElementById('loginModal');
-            const registerModal = document.getElementById('registerModal');
-            const profileModal = document.getElementById('profileModal');
-            
-            if (event.target === loginModal) {
-                closeLoginModal();
-            }
-            if (event.target === registerModal) {
-                closeRegisterModal();
-            }
-            if (event.target === profileModal) {
-                closeProfileModal();
-            }
-        }
-
-        // Profile form handling
-        document.getElementById('profileForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const profileBtn = document.getElementById('profileBtn');
-            profileBtn.disabled = true;
-            profileBtn.textContent = 'Сохранение...';
-            
+            localStorage.setItem(key, JSON.stringify(userProfile));
+            document.getElementById('profileSuccess').style.display = 'block';
             setTimeout(() => {
-                saveProfileData();
-                
-                // Show success message
-                document.getElementById('profileSuccess').style.display = 'block';
-                
-                // Hide success message after delay
-                setTimeout(() => {
-                    document.getElementById('profileSuccess').style.display = 'none';
-                }, 2000);
-                
-                profileBtn.disabled = false;
-                profileBtn.textContent = 'Сохранить изменения';
-            }, 500);
+                document.getElementById('profileSuccess').style.display = 'none';
+            }, 2000);
         });
 
-        // Clear errors when user starts typing
+        // Clear errors on input
         document.querySelectorAll('.form-input').forEach(input => {
             input.addEventListener('input', function() {
-                const inputId = this.id;
-                clearError(inputId);
+                clearError(this.id);
             });
         });
-        
-        // Footer show/hide on scroll
-        const footer = document.querySelector('.footer');
-        
-        // Показываем футер сразу при загрузке страницы
-        footer.classList.add('show');
-        
-        window.addEventListener('scroll', function() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const windowHeight = window.innerHeight;
-            const documentHeight = document.documentElement.scrollHeight;
-            
-            // Показываем футер только когда пользователь доскроллил до самого низа
-            if (scrollTop + windowHeight >= documentHeight - 50) {
-                footer.classList.add('show');
-            } else {
-                footer.classList.remove('show');
-            }
-        });
+
+        // Init
+        document.addEventListener('DOMContentLoaded', checkAuthStatus);
     </script>
 </body>
 </html>
