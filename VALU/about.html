@@ -12,157 +12,130 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #111;
+            color: #fff;
             min-height: 100vh;
-            color: #333;
             padding-bottom: 120px;
         }
-
-        /* Header */
         .header {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            background: #000;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.7);
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            width: 100%;
             z-index: 1000;
         }
-
         .nav {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 2rem;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
         }
-
         .logo {
-            font-size: 2rem;
-            font-weight: 800;
-            color: white;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #e10600;
+            letter-spacing: 2px;
             text-decoration: none;
+            text-transform: uppercase;
         }
-
         .nav-links {
             display: flex;
             gap: 2rem;
-            align-items: center;
         }
-
         .nav-link {
-            color: white;
+            color: #fff;
             text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 0.5rem 1.2rem;
             border-radius: 8px;
-            transition: all 0.3s ease;
+            transition: background 0.3s, color 0.3s;
         }
-
-        .nav-link:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
+        .nav-link.active, .nav-link:hover {
+            background: #e10600;
+            color: #fff;
         }
-
-        .nav-link.active {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Main Content */
         .main-content {
             padding: 8rem 2rem 4rem;
             max-width: 1200px;
             margin: 0 auto;
         }
-
         .page-header {
             text-align: center;
             color: white;
             margin-bottom: 4rem;
         }
-
         .page-header h1 {
             font-size: 3.5rem;
             font-weight: 800;
             margin-bottom: 1rem;
             text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
-
         .page-header p {
             font-size: 1.2rem;
             opacity: 0.9;
             max-width: 600px;
             margin: 0 auto;
         }
-
         .content-section {
-            background: rgba(255, 255, 255, 0.95);
+            background: #181818;
             border-radius: 20px;
             padding: 3rem;
             margin-bottom: 2rem;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
-
         .content-section h2 {
-            color: #667eea;
+            color: #e10600;
             font-size: 2rem;
             margin-bottom: 1.5rem;
             font-weight: 700;
         }
-
         .content-section p {
             font-size: 1.1rem;
             line-height: 1.7;
             margin-bottom: 1.5rem;
-            color: #555;
+            color: #e0e0e0;
         }
-
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
-
         .feature-card {
-            background: white;
+            background: #222;
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
             text-align: center;
             transition: transform 0.3s ease;
         }
-
         .feature-card:hover {
             transform: translateY(-5px);
         }
-
         .feature-icon {
             font-size: 3rem;
-            color: #667eea;
+            color: #e10600;
             margin-bottom: 1rem;
         }
-
         .feature-card h3 {
-            color: #333;
+            color: #fff;
             font-size: 1.3rem;
             margin-bottom: 1rem;
             font-weight: 600;
         }
-
         .feature-card p {
-            color: #666;
+            color: #e0e0e0;
             line-height: 1.6;
         }
-
         .back-btn {
             display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #e10600;
             color: white;
             padding: 1rem 2rem;
             text-decoration: none;
@@ -171,65 +144,53 @@
             transition: all 0.3s ease;
             margin-top: 2rem;
         }
-
         .back-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            background: #b80000;
         }
-
-        /* Footer */
         .footer {
-            background: rgba(0, 0, 0, 0.2);
+            background: #000;
+            color: #fff;
             padding: 3rem 2rem;
             text-align: center;
-            color: white;
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
             z-index: 999;
         }
-
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
         }
-
         .footer-links {
             display: flex;
             justify-content: center;
             gap: 2rem;
             margin-bottom: 2rem;
         }
-
         .footer-link {
-            color: white;
+            color: #fff;
             text-decoration: none;
             opacity: 0.8;
-            transition: opacity 0.3s ease;
+            transition: color 0.3s, opacity 0.3s;
         }
-
         .footer-link:hover {
+            color: #e10600;
             opacity: 1;
         }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .page-header h1 {
-                font-size: 2.5rem;
+        @media (max-width: 900px) {
+            .main-content {
+                padding: 7rem 1rem 2rem;
             }
-
-            .content-section {
-                padding: 2rem;
-            }
-
             .features-grid {
                 grid-template-columns: 1fr;
             }
-
-            .nav-links {
-                display: none;
-            }
+        }
+        @media (max-width: 600px) {
+            .logo { font-size: 1.5rem; }
+            .page-header h1 { font-size: 2rem; }
+            .content-section { padding: 1.2rem; }
         }
     </style>
 </head>
@@ -255,8 +216,8 @@
 
         <div class="content-section">
             <h2>Кто мы такие?</h2>
-            <p>VALU - это инновационная платформа, созданная для сообщества Minecraft игроков. Мы стремимся предоставить лучший пользовательский опыт и современные инструменты для игры.</p>
-            <p>Наша миссия - объединить игроков со всего мира, предоставив им удобный, безопасный и функциональный лаунчер для Minecraft.</p>
+            <p>VALU — это инновационная платформа, созданная для сообщества Minecraft игроков. Мы стремимся предоставить лучший пользовательский опыт и современные инструменты для игры.</p>
+            <p>Наша миссия — объединить игроков со всего мира, предоставив им удобный, безопасный и функциональный лаунчер для Minecraft.</p>
         </div>
 
         <div class="content-section">
@@ -289,14 +250,14 @@
         <div class="content-section">
             <h2>Наша история</h2>
             <p>Мы недавно начали развиваться в 2025 году как команда энтузиастов, стремящихся улучшить опыт игроков Minecraft.</p>
-            <p>Сейчас мы активно работаем над созданием клиента, которая поможет игрокам наслаждаться игрой и общаться с единомышленниками.</p>
+            <p>Сейчас мы активно работаем над созданием клиента, который поможет игрокам наслаждаться игрой и общаться с единомышленниками.</p>
         </div>
 
         <div class="content-section">
             <h2>Будущее VALU</h2>
-            <p>Мы постоянно работаем над улучшением нашего клиента. В планах - новые функции, улучшенный интерфейс и расширенные возможности для игроков.</p>
+            <p>Мы постоянно работаем над улучшением нашего клиента. В планах — новые функции, улучшенный интерфейс и расширенные возможности для игроков.</p>
             <p>Присоединяйтесь к нам в этом увлекательном путешествии!</p>
-            <p><a href="https://discord.gg/HG4eeF6J" target="_blank" rel="noopener">Наш Discord сервер</a></p>
+            <p><a href="https://discord.gg/HG4eeF6J" target="_blank" rel="noopener" style="color:#e10600;text-decoration:underline;">Наш Discord сервер</a></p>
         </div>
 
         <div style="text-align: center;">
